@@ -1,0 +1,152 @@
+{
+  "familyId": "rodriguez",
+  "language": "es",
+  "generatedAt": "2026-04-18T21:00:00Z",
+  "monthlySummary": {
+    "snapAmount": 571,
+    "wicValue": 82,
+    "doubleUpPotential": 25,
+    "totalFoodBudget": 678
+  },
+  "shoppingRoute": [
+    {
+      "storeId": "safeway-alabama-ave",
+      "storeName": "Safeway — Alabama Ave SE",
+      "address": "2845 Alabama Ave SE, Washington, DC 20020",
+      "distance": "0.4 millas",
+      "snapAccepted": true,
+      "wicAccepted": true,
+      "doubleUpEligible": true,
+      "doubleUpMatchMax": 25,
+      "recommendedItems": [
+        "Queso cheddar (WIC — usar antes del 22 de abril)",
+        "Leche entera (WIC — 3 galones)",
+        "Huevos (WIC — 1 docena)",
+        "Manzanas, plátanos, zanahorias (Double Up — $25 extra gratis)",
+        "Arroz, frijoles negros, masa harina"
+      ],
+      "estimatedSavings": 25,
+      "priority": 1,
+      "notes": "Empieza aquí — usa tus beneficios WIC y gana $25 extra en frutas y verduras con Double Up. Rutas de autobús 90 y 92 paran afuera."
+    },
+    {
+      "storeId": "mi-tierra-bodega",
+      "storeName": "Mi Tierra Bodega",
+      "address": "3201 Wheeler Rd SE, Washington, DC 20032",
+      "distance": "0.2 millas",
+      "snapAccepted": true,
+      "wicAccepted": false,
+      "doubleUpEligible": false,
+      "doubleUpMatchMax": 0,
+      "recommendedItems": [
+        "Loroco (para pupusas)",
+        "Masa para pupusas",
+        "Crema salvadoreña",
+        "Chiles guajillo secos",
+        "Tortillas de maíz"
+      ],
+      "estimatedSavings": 0,
+      "priority": 2,
+      "notes": "Tu tienda de barrio — ingredientes salvadoreños frescos. Acepta EBT."
+    }
+  ],
+  "wicPriorities": [
+    {
+      "category": "Queso",
+      "quantity": "1 lb",
+      "expiresAt": "2026-04-22",
+      "urgency": "high",
+      "notes": "¡Expira en 4 días! Usa en Safeway — perfecta para pupusas de queso."
+    },
+    {
+      "category": "Frutas y Verduras",
+      "quantity": "Vale de $9",
+      "expiresAt": "2026-04-25",
+      "urgency": "high",
+      "notes": "Vale de $9 expira el 25 de abril. Usa en Safeway o en el Mercado Eastern."
+    },
+    {
+      "category": "Leche",
+      "quantity": "3 galones",
+      "expiresAt": "2026-04-30",
+      "urgency": "medium",
+      "notes": "3 galones de leche entera disponibles este mes."
+    },
+    {
+      "category": "Huevos",
+      "quantity": "1 docena",
+      "expiresAt": "2026-04-30",
+      "urgency": "medium",
+      "notes": "1 docena de huevos — perfectos para desayunos y recetas."
+    },
+    {
+      "category": "Cereal integral",
+      "quantity": "36 oz",
+      "expiresAt": "2026-05-15",
+      "urgency": "low",
+      "notes": "Cereal aprobado por WIC — Cheerios o Wheaties."
+    }
+  ],
+  "recipes": [
+    {
+      "name": "Pupusas de Queso",
+      "nameTranslated": "Cheese Stuffed Corn Cakes",
+      "description": "Las pupusas clásicas salvadoreñas rellenas de queso — perfectas para usar tu queso WIC antes de que expire. Marisol y Diego las van a amar.",
+      "servings": 6,
+      "ingredients": [
+        "2 tazas de masa harina (Maseca)",
+        "1 taza de agua tibia",
+        "1 lb de queso cheddar rallado (WIC)",
+        "1/2 taza de loroco picado (opcional)",
+        "Sal al gusto",
+        "Aceite vegetal"
+      ],
+      "usesWicItems": ["Queso"],
+      "culturalOrigin": "Salvadoran",
+      "prepTimeMinutes": 30,
+      "tags": ["kid-friendly", "uses-expiring-wic", "salvadoran", "budget-friendly"]
+    },
+    {
+      "name": "Arroz con Leche para los Niños",
+      "nameTranslated": "Rice Pudding for the Kids",
+      "description": "Postre sencillo y nutritivo usando tu leche WIC. Marisol (7) y Diego (3) pueden ayudar a prepararlo.",
+      "servings": 4,
+      "ingredients": [
+        "1 taza de arroz blanco",
+        "2 tazas de leche entera (WIC)",
+        "1 taza de agua",
+        "3 cucharadas de azúcar",
+        "1 raja de canela",
+        "Pizca de sal"
+      ],
+      "usesWicItems": ["Leche"],
+      "culturalOrigin": "Latin American",
+      "prepTimeMinutes": 35,
+      "tags": ["kid-friendly", "uses-wic-milk", "dessert", "easy"]
+    },
+    {
+      "name": "Huevos Rancheros",
+      "nameTranslated": "Ranch-Style Eggs",
+      "description": "Desayuno sustancioso para toda la semana usando tus huevos WIC. Con frijoles negros y tortillas de maíz.",
+      "servings": 3,
+      "ingredients": [
+        "4 huevos (WIC)",
+        "1 lata de frijoles negros",
+        "4 tortillas de maíz",
+        "1/2 taza de salsa roja",
+        "Queso rallado (WIC)",
+        "Cilantro y cebolla"
+      ],
+      "usesWicItems": ["Huevos", "Queso"],
+      "culturalOrigin": "Mexican/Salvadoran",
+      "prepTimeMinutes": 20,
+      "tags": ["breakfast", "uses-wic-eggs", "protein-rich", "family-meal"]
+    }
+  ],
+  "tips": [
+    "🛒 Tu queso WIC expira el 22 de abril — compra en Safeway esta semana y úsalo para pupusas.",
+    "💰 Gana hasta $25 GRATIS con Double Up Food Bucks en Safeway cuando compras frutas y verduras con tu EBT.",
+    "📅 Tus beneficios WIC se recargan el 1 de mayo — planea tu compra de leche, huevos y cereal ese día."
+  ],
+  "planNarrative": "Rosa, este mes tienes $571 en SNAP y $82 en WIC — un total de $653 para alimentar a tu familia. Tu prioridad esta semana es usar el queso WIC antes del 22 de abril (¡perfecto para pupusas!) y el vale de frutas antes del 25 de abril. En Safeway Alabama Ave puedes ganar $25 extra gratis con el programa Double Up cuando compras frutas y verduras. Mi Tierra Bodega en Wheeler Rd tiene todos los ingredientes salvadoreños que necesitas y acepta EBT. ¡Buena suerte este mes, Rosa!"
+}

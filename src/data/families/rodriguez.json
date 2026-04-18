@@ -1,0 +1,60 @@
+{
+  "id": "rodriguez",
+  "name": "Rosa Rodríguez",
+  "firstName": "Rosa",
+  "lastName": "Rodríguez",
+  "age": 34,
+  "ethnicity": "Salvadoran",
+  "language": "es",
+  "householdSize": 3,
+  "children": [
+    { "name": "Marisol", "age": 7 },
+    { "name": "Diego", "age": 3 }
+  ],
+  "monthlyIncome": 2100,
+  "rent": 1400,
+  "utilities": 180,
+  "childcareCost": 0,
+  "medicalExpenses": 0,
+  "currentSnapBenefit": 487,
+  "currentWicBenefit": 82,
+  "wicItems": [
+    {
+      "category": "Cheese",
+      "quantity": "1 lb",
+      "expiresAt": "2026-04-22",
+      "urgency": "high",
+      "notes": "Shredded Mexican blend or block cheddar"
+    },
+    {
+      "category": "Milk",
+      "quantity": "3 gallons",
+      "expiresAt": "2026-04-30",
+      "urgency": "medium"
+    },
+    {
+      "category": "Eggs",
+      "quantity": "1 dozen",
+      "expiresAt": "2026-04-30",
+      "urgency": "medium"
+    },
+    {
+      "category": "Whole-grain cereal",
+      "quantity": "36 oz",
+      "expiresAt": "2026-05-15",
+      "urgency": "low"
+    },
+    {
+      "category": "Fruits & Vegetables",
+      "quantity": "$9 cash-value voucher",
+      "expiresAt": "2026-04-25",
+      "urgency": "high",
+      "notes": "Use at any WIC-authorized store or farmers market"
+    }
+  ],
+  "preferredStores": ["safeway-alabama-ave", "mi-tierra-bodega"],
+  "notes": "Rosa works as a home health aide, Mon–Fri. Childcare for Diego (age 3, full-time daycare ~$280/mo) was NOT entered on this recertification form — this is the missing deduction Claude should flag. Marisol (age 7) is in public school. Rosa speaks limited English; all communication should be in Spanish. She lives at 3421 Wheeler Rd SE, Washington DC 20032.",
+  "caseNumber": "SNAP-DC-2024-00847",
+  "caseworkerId": "maria-santos",
+  "lastUpdated": "2026-04-18"
+}

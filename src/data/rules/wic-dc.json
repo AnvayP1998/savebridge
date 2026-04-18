@@ -1,0 +1,121 @@
+{
+  "program": "Special Supplemental Nutrition Program for Women, Infants, and Children (WIC)",
+  "state": "District of Columbia",
+  "effectiveDate": "2024-10-01",
+  "categories": [
+    {
+      "id": "milk",
+      "name": "Milk",
+      "allowedTypes": ["whole (children 1-2)", "reduced-fat 2% (adults)", "skim/non-fat", "evaporated (canned)", "dry/powdered"],
+      "notAllowed": ["flavored milk", "organic (unless same price)", "buttermilk"],
+      "allocations": {
+        "pregnant": "22 quarts/month",
+        "breastfeeding": "24 quarts/month",
+        "postpartum_non_breastfeeding": "4 quarts/month",
+        "infant_0_3mo": "0 (formula provided)",
+        "infant_4_11mo": "0",
+        "child_1_4": "16 quarts/month"
+      }
+    },
+    {
+      "id": "cheese",
+      "name": "Cheese",
+      "allowedTypes": ["American", "cheddar", "colby", "Monterey Jack", "mozzarella", "Swiss", "Mexican blend"],
+      "allowedSizes": ["16 oz or less per package"],
+      "notAllowed": ["string cheese", "cottage cheese", "cream cheese", "processed cheese food", "cheese spreads"],
+      "allocations": {
+        "pregnant": "1 lb/month",
+        "breastfeeding": "1 lb/month",
+        "postpartum_non_breastfeeding": "0",
+        "child_1_4": "1 lb/month"
+      }
+    },
+    {
+      "id": "eggs",
+      "name": "Eggs",
+      "allowedTypes": ["large white or brown"],
+      "notAllowed": ["organic (price difference)", "cage-free (unless same price)", "liquid eggs"],
+      "allocations": {
+        "pregnant": "1 dozen/month",
+        "breastfeeding": "2 dozen/month",
+        "postpartum_non_breastfeeding": "1 dozen/month",
+        "child_1_4": "1 dozen/month"
+      }
+    },
+    {
+      "id": "whole_grain_cereal",
+      "name": "Whole-Grain Cereal",
+      "allowedTypes": ["Cheerios (plain)", "Total Whole Grain", "Wheaties", "Kix", "Corn Chex", "Rice Chex", "Wheat Chex", "Life (plain)", "Mini-Wheats (plain)"],
+      "requiresWicLogo": true,
+      "allowedSizes": ["36 oz or less"],
+      "allocations": {
+        "pregnant": "36 oz/month",
+        "breastfeeding": "36 oz/month",
+        "postpartum_non_breastfeeding": "36 oz/month",
+        "child_1_4": "36 oz/month"
+      }
+    },
+    {
+      "id": "juice",
+      "name": "100% Fruit/Vegetable Juice",
+      "allowedTypes": ["orange", "apple", "grape", "grapefruit", "pineapple", "tomato", "vegetable blend"],
+      "allowedForms": ["frozen concentrate", "bottled (64 oz)"],
+      "notAllowed": ["juice drinks", "cocktails", "punches", "smoothies"],
+      "allocations": {
+        "pregnant": "2 x 64 oz or 3 x 11.5oz concentrate/month",
+        "breastfeeding": "2 x 64 oz/month",
+        "child_1_4": "1 x 64 oz or 2 x 11.5oz concentrate/month"
+      }
+    },
+    {
+      "id": "fruits_vegetables",
+      "name": "Fruits & Vegetables (Cash Value Benefit)",
+      "description": "Cash-value voucher redeemable for any fresh, frozen (no sauce/sugar added), or canned (low-sodium, no syrup) fruits and vegetables",
+      "allocations": {
+        "pregnant": "$9/month CVB",
+        "breastfeeding": "$11/month CVB",
+        "postpartum_non_breastfeeding": "$8/month CVB",
+        "child_1_4": "$9/month CVB"
+      },
+      "notes": "Accepted at WIC-authorized stores and WIC Farmers Market Nutrition Program (FMNP) vendors. Cannot be used for white potatoes."
+    },
+    {
+      "id": "infant_formula",
+      "name": "Infant Formula",
+      "contractBrand": "Enfamil (Mead Johnson) — DC sole-source contract",
+      "allowedProducts": ["Enfamil Infant (powder)", "Enfamil NeuroPro (powder)", "Enfamil Gentlease (powder)"],
+      "medicallyNecessaryAlternatives": "Requires WIC nutritionist authorization",
+      "allocations": {
+        "infant_0_3mo": "806 oz powder/month",
+        "infant_4_5mo": "806 oz powder/month",
+        "infant_6_11mo_formula_only": "459 oz powder/month",
+        "infant_6_11mo_with_food": "364 oz powder/month"
+      }
+    },
+    {
+      "id": "baby_food",
+      "name": "Baby Food",
+      "allowedTypes": ["single-ingredient vegetables", "single-ingredient fruits", "meat (stage 2/3)"],
+      "notAllowed": ["combination dinners", "desserts", "yogurt varieties", "stage 1 in glass"],
+      "allowedBrands": ["Gerber", "Beechnut", "Earth's Best"],
+      "allocations": {
+        "infant_6_7mo": "64 oz fruit + 64 oz vegetable/month",
+        "infant_8_11mo": "128 oz fruit + 128 oz vegetable + 77.5 oz meat/month"
+      }
+    },
+    {
+      "id": "whole_grains",
+      "name": "Whole Grains (bread, tortillas, brown rice, oatmeal)",
+      "allowedTypes": ["100% whole wheat bread", "corn tortillas (100% whole grain)", "brown rice", "whole grain oats/oatmeal"],
+      "allocations": {
+        "pregnant": "16 oz bread OR 16 oz tortillas OR 24 oz rice OR 16 oz oatmeal/month",
+        "breastfeeding": "16 oz/month",
+        "child_1_4": "16 oz/month"
+      }
+    }
+  ],
+  "participantTypes": ["pregnant", "breastfeeding", "postpartum_non_breastfeeding", "infant_0_3mo", "infant_4_5mo", "infant_6_11mo", "child_1_4"],
+  "benefitDuration": "Monthly benefits load on participant's WIC card on the 1st of each month",
+  "expirationPolicy": "Benefits expire on the last day of the benefit month. Unused benefits do not roll over.",
+  "authorizedStores": "Search at wic.dc.gov/store-locator or call 1-800-345-1WIC"
+}

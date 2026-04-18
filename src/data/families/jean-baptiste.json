@@ -1,0 +1,53 @@
+{
+  "id": "jean-baptiste",
+  "name": "Famille Jean-Baptiste",
+  "firstName": "Marie-Claire",
+  "lastName": "Jean-Baptiste",
+  "age": 68,
+  "ethnicity": "Haitian",
+  "language": "ht",
+  "householdSize": 6,
+  "children": [
+    { "name": "Théo", "age": 5 },
+    { "name": "Lucie", "age": 2 }
+  ],
+  "monthlyIncome": 3400,
+  "rent": 2100,
+  "utilities": 220,
+  "childcareCost": 0,
+  "medicalExpenses": 180,
+  "currentSnapBenefit": 712,
+  "currentWicBenefit": 164,
+  "wicItems": [
+    {
+      "category": "Infant Formula",
+      "quantity": "4 cans (13 oz)",
+      "expiresAt": "2026-04-28",
+      "urgency": "high",
+      "notes": "Enfamil Infant or Similac Advance"
+    },
+    {
+      "category": "Baby Food",
+      "quantity": "128 oz (stage 2 vegetables/fruits)",
+      "expiresAt": "2026-05-10",
+      "urgency": "medium"
+    },
+    {
+      "category": "Milk",
+      "quantity": "6 gallons",
+      "expiresAt": "2026-04-30",
+      "urgency": "medium"
+    },
+    {
+      "category": "Juice",
+      "quantity": "2 x 64 oz",
+      "expiresAt": "2026-05-20",
+      "urgency": "low"
+    }
+  ],
+  "preferredStores": ["giant-alabama-ave", "good-food-market"],
+  "notes": "Multi-generational household: grandmother Marie-Claire (primary contact, Haitian Creole speaker), adult daughter Nadège (32), son-in-law Réginald (35), and two grandchildren Théo (5) and Lucie (2). Marie-Claire has Type 2 diabetes — medical deduction may be under-reported. Nadège and Réginald both work in food service. Family cooks Haitian staples: griot, diri ak djon djon, legim. Lives at 1204 Benning Rd NE, Washington DC 20002.",
+  "caseNumber": "SNAP-DC-2024-01203",
+  "caseworkerId": "maria-santos",
+  "lastUpdated": "2026-04-15"
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "id": "err-001",
+    "type": "missing_deduction",
+    "title": "Potential missing dependent care deduction",
+    "explanation": "Rosa's household includes Diego (age 3), who is below school age and almost certainly requires paid childcare while Rosa works as a home health aide. The application reports $0 in childcare costs, which is very unlikely for a full-time working parent with a 3-year-old.",
+    "suggestedAction": "Ask Rosa about childcare arrangements for Diego. If she pays for daycare or a babysitter, enter that amount in the Dependent Care field. A typical DC daycare for a 3-year-old runs $200–$350/month.",
+    "fieldAffected": "childcareCost",
+    "benefitImpact": 84,
+    "severity": "warning",
+    "confidence": 0.92,
+    "references": ["7 CFR 273.9(d)(4)"]
+  }
+]
