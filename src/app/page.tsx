@@ -58,7 +58,7 @@ export default function Home() {
         className="text-center mb-12 z-10"
         initial={{ opacity: 0, y: 28 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        transition={{ duration: 0.6, ease: "easeOut" as const }}
       >
         <div className="inline-flex items-center gap-3 mb-5">
           <span className="text-5xl drop-shadow-lg">🌉</span>
@@ -88,7 +88,7 @@ export default function Home() {
         className="grid grid-cols-3 gap-6 max-w-2xl w-full mb-14 z-10"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
+        transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" as const }}
       >
         {impactStats.map((s) => (
           <div
@@ -112,7 +112,7 @@ export default function Home() {
             key={card.href}
             initial={{ opacity: 0, y: 32 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35 + i * 0.12, ease: "easeOut" }}
+            transition={{ duration: 0.5, delay: 0.35 + i * 0.12, ease: "easeOut" as const }}
           >
             <Link
               href={card.href}

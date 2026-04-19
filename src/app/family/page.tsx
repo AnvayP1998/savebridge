@@ -1,11 +1,11 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import CountUp from "react-countup";
 import type { BenefitPlan } from "@/types";
 import cachedPlan from "@/data/cached/plan-rodriguez.json";
 
-// ── Nutrition data sourced from USDA FoodData Central (fdcId lookups) ──────
-// Values per serving, pre-cached so demo works offline
 const NUTRITION: Record<string, { cal: number; protein: string; badge: string; source: string }> = {
   "Pupusas de Queso y Frijoles": { cal: 380, protein: "14g", badge: "🫘 Rico en hierro", source: "Black beans · USDA FDC #173735" },
   "Arroz con Leche":             { cal: 220, protein: "6g",  badge: "🥛 Calcio",         source: "Whole milk · USDA FDC #746782" },
@@ -31,6 +31,12 @@ const QUICK_QUESTIONS: Record<"es" | "en", string[]> = {
   en: ["Can I buy hot food with EBT?", "What produce doubles my money at Safeway?", "When does my WIC expire?"],
 };
 
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.4, delay, ease: "easeOut" as const },
+});
+
 export default function FamilyPage() {
   const [plan, setPlan] = useState<BenefitPlan | null>(null);
   const [familyId, setFamilyId] = useState("rodriguez");
@@ -41,15 +47,14 @@ export default function FamilyPage() {
   const [asking, setAsking] = useState(false);
   const [lang, setLang] = useState<"es" | "en">("es");
   const [speechSupported, setSpeechSupported] = useState(true);
+  const [copied, setCopied] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    // Check speech recognition support
     const hasSR = typeof window !== "undefined" &&
       ("SpeechRecognition" in window || "webkitSpeechRecognition" in window);
     setSpeechSupported(hasSR);
 
-    // Load plan from localStorage (written by caseworker "Send to Phone" button)
     const stored = localStorage.getItem("savorbridge-plan");
     const storedId = localStorage.getItem("savorbridge-familyId");
     const storedName = localStorage.getItem("savorbridge-familyName");
@@ -104,55 +109,79 @@ export default function FamilyPage() {
     recognition.start();
   }
 
-  if (!plan) return <div className="flex items-center justify-center min-h-screen text-gray-400">Cargando...</div>;
+  function copyPlan() {
+    if (!plan) return;
+    const text = [
+      `SavorBridge — ${lang === "es" ? "Plan de Beneficios" : "Benefit Plan"}`,
+      `SNAP: $${plan.monthlySummary.snapAmount} · WIC: $${plan.monthlySummary.wicValue} · Total: $${plan.monthlySummary.totalFoodBudget}`,
+      "",
+      lang === "es" ? "Artículos WIC:" : "WIC Items:",
+      ...plan.wicPriorities.map(w => `• ${w.category} — ${w.quantity}`),
+      "",
+      lang === "es" ? "Dónde comprar:" : "Where to shop:",
+      ...plan.shoppingRoute.map(s => `• ${s.storeName} — ${s.address}`),
+    ].join("\n");
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
+  }
 
+  if (!plan) return (
+    <div className="flex items-center justify-center min-h-screen bg-gray-50">
+      <div className="flex flex-col items-center gap-3 text-gray-400">
+        <span className="w-8 h-8 border-2 border-[#1F3A5F] border-t-transparent rounded-full animate-spin" />
+        <p className="text-sm">Cargando tu plan…</p>
+      </div>
+    </div>
+  );
 
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col items-center">
       <div className="w-full max-w-md mx-auto flex flex-col min-h-screen">
 
-        {/* Header */}
-        <div className="bg-[#1F3A5F] text-white px-4 py-4 flex items-center justify-between">
+        {/* Header — gradient */}
+        <div className="bg-gradient-to-r from-[#1F3A5F] to-[#2d5a8e] text-white px-4 py-4 flex items-center justify-between shadow-md">
           <div>
-            <h1 className="font-bold text-lg">🌉 SavorBridge</h1>
-            <p className="text-xs opacity-70">
+            <h1 className="font-bold text-lg tracking-tight">🌉 SavorBridge</h1>
+            <p className="text-xs opacity-70 mt-0.5">
               {lang === "es" ? "Plan de Beneficios" : "Benefit Plan"} · {familyDisplayName}
             </p>
           </div>
           <button
             onClick={() => setLang(l => l === "es" ? "en" : "es")}
-            className="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-colors font-semibold">
+            className="text-xs bg-white/20 hover:bg-white/30 px-3 py-1.5 rounded-full transition-colors font-semibold border border-white/20">
             {lang === "es" ? "🇸🇻 ES" : "🇺🇸 EN"}
           </button>
         </div>
 
         <div className="flex-1 overflow-y-auto px-4 py-5 space-y-5 pb-32">
 
-          {/* Monthly summary */}
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+          {/* Monthly summary — CountUp */}
+          <motion.div {...fadeUp(0.05)}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
               {lang === "es" ? "Este mes tienes" : "Your benefits this month"}
             </p>
             <div className="grid grid-cols-3 gap-2">
-              <div className="bg-[#1F3A5F] text-white rounded-xl p-3 text-center">
-                <p className="text-xs opacity-60 mb-0.5">SNAP</p>
-                <p className="text-xl font-bold">${plan.monthlySummary.snapAmount}</p>
-              </div>
-              <div className="bg-green-600 text-white rounded-xl p-3 text-center">
-                <p className="text-xs opacity-60 mb-0.5">WIC</p>
-                <p className="text-xl font-bold">${plan.monthlySummary.wicValue}</p>
-              </div>
-              <div className="bg-emerald-500 text-white rounded-xl p-3 text-center">
-                <p className="text-xs opacity-60 mb-0.5">{lang === "es" ? "Total" : "Total"}</p>
-                <p className="text-xl font-bold">${plan.monthlySummary.totalFoodBudget}</p>
-              </div>
+              {[
+                { label: "SNAP", value: plan.monthlySummary.snapAmount, bg: "bg-[#1F3A5F]" },
+                { label: "WIC",  value: plan.monthlySummary.wicValue,   bg: "bg-green-600" },
+                { label: "Total", value: plan.monthlySummary.totalFoodBudget, bg: "bg-emerald-500" },
+              ].map((item) => (
+                <div key={item.label} className={`${item.bg} text-white rounded-xl p-3 text-center shadow-sm`}>
+                  <p className="text-xs opacity-60 mb-0.5">{item.label}</p>
+                  <p className="text-xl font-extrabold">
+                    $<CountUp end={item.value} duration={1.5} />
+                  </p>
+                </div>
+              ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* WIC expiration warnings — with countdown */}
+          {/* WIC items */}
           {plan.wicPriorities.length > 0 && (
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+            <motion.div {...fadeUp(0.12)}>
+              <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
                 {lang === "es" ? "Artículos WIC — ¡No los pierdas!" : "WIC Items — Don't lose them!"}
               </p>
               <div className="space-y-2">
@@ -161,11 +190,18 @@ export default function FamilyPage() {
                   const urgent = days !== null && days <= 7;
                   const soon = days !== null && days <= 14 && days > 7;
                   return (
-                    <div key={i} className={`flex items-center gap-3 rounded-xl px-4 py-3 ${
-                      item.urgency === "high" ? "bg-red-50 border border-red-200"
-                      : item.urgency === "medium" ? "bg-yellow-50 border border-yellow-200"
-                      : "bg-gray-50 border border-gray-100"}`}>
-                      <span className="text-xl">{item.urgency === "high" ? "🔴" : item.urgency === "medium" ? "🟡" : "🟢"}</span>
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -12 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ delay: 0.15 + i * 0.08 }}
+                      className={`flex items-center gap-3 rounded-xl px-4 py-3 border ${
+                        item.urgency === "high" ? "bg-red-50 border-red-200"
+                        : item.urgency === "medium" ? "bg-yellow-50 border-yellow-200"
+                        : "bg-gray-50 border-gray-100"}`}>
+                      <span className={`text-xl ${urgent ? "animate-pulse" : ""}`}>
+                        {item.urgency === "high" ? "🔴" : item.urgency === "medium" ? "🟡" : "🟢"}
+                      </span>
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold text-gray-800 text-sm">{item.category}</p>
                         <p className="text-xs text-gray-500">{item.quantity}</p>
@@ -180,29 +216,29 @@ export default function FamilyPage() {
                             : lang === "es" ? `vence ${item.expiresAt?.slice(5).replace("-", "/")}` : `exp ${item.expiresAt?.slice(5).replace("-", "/")}`}
                         </span>
                       )}
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Shopping route */}
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+          <motion.div {...fadeUp(0.2)}>
+            <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
               {lang === "es" ? "🗺️ Dónde comprar" : "🗺️ Where to shop"}
             </p>
             <div className="space-y-2">
               {plan.shoppingRoute.map((stop, i) => (
-                <div key={i} className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm">
-                  <div className="flex items-start gap-2">
-                    <span className="bg-[#1F3A5F] text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
+                <div key={i} className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
+                  <div className="flex items-start gap-3">
+                    <span className="bg-[#1F3A5F] text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5">{i + 1}</span>
                     <div className="flex-1">
                       <p className="font-semibold text-gray-800 text-sm">{stop.storeName}</p>
                       <p className="text-xs text-gray-400">{stop.address}</p>
-                      <div className="flex gap-1 mt-1 flex-wrap">
+                      <div className="flex gap-1.5 mt-1.5 flex-wrap">
                         {stop.doubleUpEligible && (
-                          <span className="text-xs bg-green-100 text-green-700 font-semibold px-2 py-0.5 rounded-full">💰 Double Up 2x</span>
+                          <span className="text-xs bg-green-100 text-green-700 font-semibold px-2 py-0.5 rounded-full">💰 Double Up 2×</span>
                         )}
                         {stop.wicAccepted && (
                           <span className="text-xs bg-blue-100 text-blue-700 font-semibold px-2 py-0.5 rounded-full">WIC ✓</span>
@@ -213,21 +249,27 @@ export default function FamilyPage() {
                 </div>
               ))}
             </div>
-          </div>
+          </motion.div>
 
-          {/* Recipes — with USDA nutrition badges */}
-          <div>
+          {/* Recipes */}
+          <motion.div {...fadeUp(0.28)}>
             <div className="flex items-center justify-between mb-2">
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray-500">
+              <p className="text-xs font-semibold uppercase tracking-widest text-gray-400">
                 {lang === "es" ? "🍽️ Recetas con tus beneficios" : "🍽️ Recipes using your benefits"}
               </p>
-              <span className="text-xs text-gray-400">USDA FoodData Central</span>
+              <span className="text-xs text-gray-400">USDA FDC</span>
             </div>
             <div className="space-y-2">
               {plan.recipes.map((r, i) => {
                 const nut = NUTRITION[r.name];
                 return (
-                  <div key={i} className="bg-amber-50 border border-amber-100 rounded-xl p-4">
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 + i * 0.08 }}
+                    className="bg-amber-50 border border-amber-100 rounded-xl p-4 hover:shadow-sm transition-shadow"
+                  >
                     <div className="flex items-start justify-between gap-2">
                       <div className="flex-1">
                         <p className="font-bold text-gray-800">{r.name}</p>
@@ -246,63 +288,65 @@ export default function FamilyPage() {
                       </div>
                     )}
                     <p className="text-xs text-gray-400 mt-1">⏱️ {r.prepTimeMinutes} min · {r.servings} {lang === "es" ? "porciones" : "servings"}</p>
-                  </div>
+                  </motion.div>
                 );
               })}
             </div>
-          </div>
+          </motion.div>
 
           {/* Tips */}
           {plan.tips && plan.tips.length > 0 && (
-            <div>
-              <p className="text-xs font-semibold uppercase tracking-wide text-gray-500 mb-2">
+            <motion.div {...fadeUp(0.36)}>
+              <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
                 💡 {lang === "es" ? "Consejos del mes" : "Tips this month"}
               </p>
               <div className="space-y-2">
                 {plan.tips.map((tip, i) => (
-                  <p key={i} className="text-sm text-gray-700 bg-green-50 rounded-xl px-4 py-3 leading-relaxed">{tip}</p>
+                  <p key={i} className="text-sm text-gray-700 bg-green-50 border border-green-100 rounded-xl px-4 py-3 leading-relaxed">{tip}</p>
                 ))}
               </div>
-            </div>
+            </motion.div>
           )}
 
           {/* Voice answer */}
-          {answer && (
-            <div className="bg-[#1F3A5F] text-white rounded-2xl p-4">
-              <p className="text-xs opacity-60 mb-1">{lang === "es" ? "Respuesta:" : "Answer:"}</p>
-              <p className="text-sm leading-relaxed">{answer}</p>
-            </div>
-          )}
+          <AnimatePresence>
+            {answer && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                className="bg-gradient-to-br from-[#1F3A5F] to-[#2d5a8e] text-white rounded-2xl p-4 shadow-lg"
+              >
+                <div className="flex items-center gap-2 mb-2">
+                  <span className="text-base">🤖</span>
+                  <p className="text-xs opacity-60 font-semibold uppercase tracking-wide">
+                    {lang === "es" ? "Respuesta de Claude" : "Claude's Answer"}
+                  </p>
+                </div>
+                <p className="text-sm leading-relaxed">{answer}</p>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
-          {/* Print / Share plan */}
-          <div className="flex gap-2 pb-1">
+          {/* Print / Copy */}
+          <motion.div {...fadeUp(0.42)} className="flex gap-2 pb-1">
             <button
               onClick={() => window.print()}
-              className="flex-1 flex items-center justify-center gap-2 border border-gray-200 rounded-xl py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
+              className="flex-1 flex items-center justify-center gap-2 bg-white border border-gray-200 rounded-xl py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-50 hover:shadow-sm transition-all">
               🖨️ {lang === "es" ? "Imprimir plan" : "Print plan"}
             </button>
             <button
-              onClick={() => {
-                const text = [
-                  `SavorBridge — ${lang === "es" ? "Plan de Beneficios" : "Benefit Plan"}`,
-                  `SNAP: $${plan.monthlySummary.snapAmount} · WIC: $${plan.monthlySummary.wicValue} · Total: $${plan.monthlySummary.totalFoodBudget}`,
-                  "",
-                  lang === "es" ? "Artículos WIC:" : "WIC Items:",
-                  ...plan.wicPriorities.map(w => `• ${w.category} — ${w.quantity}`),
-                  "",
-                  lang === "es" ? "Dónde comprar:" : "Where to shop:",
-                  ...plan.shoppingRoute.map(s => `• ${s.storeName} — ${s.address}`),
-                ].join("\n");
-                navigator.clipboard.writeText(text).then(() => alert(lang === "es" ? "¡Copiado al portapapeles!" : "Copied to clipboard!"));
-              }}
-              className="flex-1 flex items-center justify-center gap-2 border border-gray-200 rounded-xl py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
-              📋 {lang === "es" ? "Copiar resumen" : "Copy summary"}
+              onClick={copyPlan}
+              className="flex-1 flex items-center justify-center gap-2 bg-white border border-gray-200 rounded-xl py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-50 hover:shadow-sm transition-all">
+              {copied ? "✅" : "📋"} {copied
+                ? (lang === "es" ? "¡Copiado!" : "Copied!")
+                : (lang === "es" ? "Copiar resumen" : "Copy summary")}
             </button>
-          </div>
+          </motion.div>
 
           {/* Quick questions */}
-          <div className="pb-4">
-            <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">
+          <motion.div {...fadeUp(0.48)} className="pb-4">
+            <p className="text-xs font-semibold uppercase tracking-widest text-gray-400 mb-2">
               {lang === "es" ? "Preguntas frecuentes" : "Common questions"}
             </p>
             <div className="flex flex-wrap gap-2">
@@ -310,21 +354,21 @@ export default function FamilyPage() {
                 <button
                   key={q}
                   onClick={() => { setQuery(q); askQuestion(q); }}
-                  className="text-xs text-gray-600 bg-gray-100 hover:bg-gray-200 border border-gray-200 rounded-full px-3 py-1.5 transition-colors text-left"
+                  className="text-xs text-[#1F3A5F] bg-blue-50 hover:bg-blue-100 border border-blue-100 rounded-full px-3 py-1.5 transition-colors font-medium text-left"
                 >
                   {q}
                 </button>
               ))}
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Voice Q&A bar — fixed bottom */}
         <div className="fixed bottom-0 left-0 right-0 flex justify-center">
-          <div className="w-full max-w-md bg-white border-t border-gray-100 px-4 py-3 shadow-lg">
+          <div className="w-full max-w-md bg-white border-t border-gray-100 px-4 py-3 shadow-xl">
             {!speechSupported && (
-              <p className="text-xs text-amber-600 text-center mb-2">
-                🎤 {lang === "es"
+              <p className="text-xs text-amber-600 text-center mb-2 font-medium">
+                ⌨️ {lang === "es"
                   ? "Voz disponible solo en Chrome — escribe tu pregunta abajo"
                   : "Voice only available in Chrome — type your question below"}
               </p>
@@ -336,15 +380,15 @@ export default function FamilyPage() {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && askQuestion(query)}
                 placeholder={lang === "es" ? "Pregúntame algo…" : "Ask me anything…"}
-                className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#1F3A5F]"
+                className="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm outline-none focus:border-[#1F3A5F] focus:ring-1 focus:ring-[#1F3A5F]/20 transition-all"
               />
               <button
                 onClick={speechSupported ? startListening : () => inputRef.current?.focus()}
                 disabled={asking}
                 title={!speechSupported ? (lang === "es" ? "Requiere Chrome" : "Requires Chrome") : undefined}
-                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all shrink-0 text-white text-xl ${
+                className={`w-12 h-12 rounded-xl flex items-center justify-center transition-all shrink-0 text-white text-xl shadow-sm ${
                   !speechSupported ? "bg-gray-300 cursor-not-allowed"
-                  : listening ? "bg-red-500 animate-pulse"
+                  : listening ? "bg-red-500 animate-pulse shadow-red-200"
                   : "bg-[#1F3A5F] hover:bg-[#162d4a]"
                 }`}>
                 {asking
@@ -354,7 +398,7 @@ export default function FamilyPage() {
               <button
                 onClick={() => askQuestion(query)}
                 disabled={asking || !query.trim()}
-                className="w-12 h-12 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white flex items-center justify-center shrink-0 disabled:opacity-40 text-lg">
+                className="w-12 h-12 rounded-xl bg-[#10B981] hover:bg-[#059669] text-white flex items-center justify-center shrink-0 disabled:opacity-40 text-lg shadow-sm transition-colors">
                 →
               </button>
             </div>
