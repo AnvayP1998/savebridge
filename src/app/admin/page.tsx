@@ -40,7 +40,7 @@ const caseworkers = [
   { name: "Maria Santos",    families: 47, errors: 23, recovered: 1892 },
   { name: "James Williams",  families: 38, errors: 18, recovered: 1476 },
   { name: "Ana Flores",      families: 32, errors: 15, recovered: 1230 },
-  { name: "David Kim",       families: 26, errors: 12, recovered:  984 },
+  { name: "Dhamdhere Ketan",       families: 26, errors: 12, recovered:  984 },
 ];
 
 const recentFlags = [
