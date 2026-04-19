@@ -104,7 +104,7 @@ export default function FamilyPage() {
   if (!plan) return <div className="flex items-center justify-center min-h-screen text-gray-400">Cargando...</div>;
 
   // Derive family name from plan narrative or fall back gracefully
-  const familyName = (plan as unknown as { familyId?: string }).familyId ?? familyId;
+const familyName = localStorage.getItem("savorbridge-familyName") ?? "Rosa Rodríguez";
 
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col items-center">
