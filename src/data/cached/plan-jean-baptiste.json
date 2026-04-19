@@ -1,0 +1,96 @@
+{
+  "familyId": "jean-baptiste",
+  "language": "ht",
+  "generatedAt": "2026-04-18T00:00:00Z",
+  "monthlySummary": {
+    "snapAmount": 875,
+    "wicValue": 164,
+    "totalFoodBudget": 1039,
+    "doubleUpPotential": 25,
+    "notes": "Benefis SNAP ou yo ogmante de $712 a $875 apre nou jwenn déduction swen timoun ak depans medikal. WIC la kouvri fòmil pou Lucie ak lèt pou tout fanmi an."
+  },
+  "wicPriorities": [
+    {
+      "category": "Fòmil Tibebe (Infant Formula)",
+      "quantity": "4 bwat (13 oz) — Enfamil oswa Similac",
+      "expiresAt": "2026-04-28",
+      "urgency": "high",
+      "notes": "Ekspire nan 10 jou — achte nan Giant Alabama Ave oswa Good Food Markets"
+    },
+    {
+      "category": "Lèt (Milk)",
+      "quantity": "6 galon",
+      "expiresAt": "2026-04-30",
+      "urgency": "medium"
+    },
+    {
+      "category": "Manje Tibebe (Baby Food)",
+      "quantity": "128 oz legim/fwi etap 2",
+      "expiresAt": "2026-05-10",
+      "urgency": "medium"
+    },
+    {
+      "category": "Ji (Juice)",
+      "quantity": "2 x 64 oz",
+      "expiresAt": "2026-05-20",
+      "urgency": "low"
+    }
+  ],
+  "shoppingRoute": [
+    {
+      "storeName": "Giant Food — Alabama Ave SE",
+      "address": "2nd & Alabama Ave SE, Washington DC",
+      "wicAccepted": true,
+      "snapAccepted": true,
+      "doubleUpEligible": false,
+      "items": ["Fòmil Tibebe", "Lèt", "Manje Tibebe", "Ji", "Pwodui fre"],
+      "estimatedSpend": 180,
+      "notes": "Giant aksepte WIC — deplase nan rayon lèt dabò pou chache fòmil la"
+    },
+    {
+      "storeName": "Good Food Markets — Benning Rd",
+      "address": "1 Benning Rd NE, Washington DC",
+      "wicAccepted": true,
+      "snapAccepted": true,
+      "doubleUpEligible": true,
+      "items": ["Legim fre", "Fwi", "Pwa nwa", "Diri"],
+      "estimatedSpend": 95,
+      "notes": "Double Up Food Bucks — $25 match sou fwi ak legim. Depanse $25 SNAP jwenn $25 gratis!"
+    }
+  ],
+  "recipes": [
+    {
+      "name": "Griot ak Bannann Peze",
+      "nameTranslated": "Fried Pork with Fried Plantains",
+      "description": "Pòk kwit nan ji zoranj sou ak epis ayisyen, fri jis li krakanch. Sèvi ak bannann peze ak pikliz. Ou ka fè sa ak SNAP.",
+      "prepTimeMinutes": 45,
+      "servings": 6,
+      "wicIngredients": [],
+      "snapIngredients": ["Pòk", "Bannann jòn", "Zoranj sou", "Piman", "Lay"]
+    },
+    {
+      "name": "Diri ak Djon Djon",
+      "nameTranslated": "Black Mushroom Rice",
+      "description": "Diri nwa tipik ayisyen fèt ak chanpiyon djon djon. Rich an pwoteyin ak bon pou tout moun nan fanmi — Théo ak Lucie renmen l tou.",
+      "prepTimeMinutes": 35,
+      "servings": 6,
+      "wicIngredients": [],
+      "snapIngredients": ["Diri", "Chanpiyon djon djon", "Pwa nwa", "Lay", "Sel"]
+    },
+    {
+      "name": "Soup Joumou",
+      "nameTranslated": "Haitian Independence Pumpkin Soup",
+      "description": "Soup tradisyonèl ayisyen ak joumou, legim, ak vyann. Ou ka fè yon gwo chodyè pou tout semèn nan — ekonomize lajan ak tan.",
+      "prepTimeMinutes": 90,
+      "servings": 8,
+      "wicIngredients": ["Lèt"],
+      "snapIngredients": ["Joumou (ponpkin)", "Pòk", "Makaroni", "Kawòt", "Nave", "Pòmdètè"]
+    }
+  ],
+  "tips": [
+    "Fòmil tibebe Lucie ekspire 28 avril — ale nan Giant Alabama Ave anvan dat sa a.",
+    "Good Food Markets bay $25 gratis sou fwi ak legim — toujou achte fwi la a pou double lajan ou.",
+    "Si ou gen reçu medikal pou Marie-Claire, pote yo bay travayè sosyal ou — yo ka ogmante benefis SNAP ou ankò."
+  ],
+  "planNarrative": "Fanmi Jean-Baptiste, benefis SNAP nou yo ogmante de $712 a $875 pa mwa. Avèk WIC $164 ou, bidjè manje total ou se $1,039 pa mwa pou 6 moun. Priyorite ou: achte fòmil Lucie nan Giant avan 28 avril, epi ale nan Good Food Markets pou doble lajan ou sou fwi ak legim. Kontinye kolekte reçu medikal Marie-Claire — yo ka ede ogmante benefis ou plis."
+}

@@ -1,0 +1,70 @@
+{
+  "familyId": "nguyen",
+  "language": "vi",
+  "generatedAt": "2026-04-18T00:00:00Z",
+  "monthlySummary": {
+    "snapAmount": 258,
+    "wicValue": 0,
+    "totalFoodBudget": 308,
+    "doubleUpPotential": 25,
+    "notes": "Tiền SNAP tăng từ $194 lên $258 sau khi áp dụng khoản khấu trừ y tế đúng cách. Thêm $50 phiếu SFMNP tại chợ nông sản — tổng ngân sách thực phẩm là $308/tháng."
+  },
+  "wicPriorities": [],
+  "shoppingRoute": [
+    {
+      "storeName": "Eastern Market",
+      "address": "225 7th St SE, Washington DC",
+      "wicAccepted": false,
+      "snapAccepted": true,
+      "doubleUpEligible": true,
+      "items": ["Rau củ tươi", "Đậu hũ", "Cá tươi", "Gạo jasmine"],
+      "estimatedSpend": 80,
+      "notes": "Chấp nhận phiếu SFMNP ($50 mùa hè) và Double Up Food Bucks — $25 tiền rau củ miễn phí. Gần tuyến xe buýt H St NE."
+    },
+    {
+      "storeName": "Capital Area Food Bank Mobile Pantry",
+      "address": "4900 Puerto Rico Ave NE (lịch trình xoay vòng)",
+      "wicAccepted": false,
+      "snapAccepted": false,
+      "doubleUpEligible": false,
+      "items": ["Gạo", "Đậu khô", "Dầu ăn", "Đồ hộp"],
+      "estimatedSpend": 0,
+      "notes": "Miễn phí — không cần thẻ EBT. Bà Nguyễn đủ điều kiện nhận hàng tháng. Gọi 202-644-9800 để kiểm tra lịch."
+    }
+  ],
+  "recipes": [
+    {
+      "name": "Cháo Cá với Gừng",
+      "nameTranslated": "Rice Porridge with Fish and Ginger",
+      "description": "Cháo trắng nấu với cá tươi, gừng và hành lá. Dễ tiêu hóa, tốt cho sức khỏe người cao tuổi. Mua cá tươi tại Eastern Market với thẻ SNAP.",
+      "prepTimeMinutes": 30,
+      "servings": 2,
+      "wicIngredients": [],
+      "snapIngredients": ["Gạo jasmine", "Cá rô phi hoặc cá tra", "Gừng tươi", "Hành lá", "Nước mắm"]
+    },
+    {
+      "name": "Canh Rau Cải với Đậu Hũ",
+      "nameTranslated": "Bok Choy Soup with Tofu",
+      "description": "Canh thanh đạm với rau cải xanh và đậu hũ — giàu canxi tốt cho xương khớp. Nấu một nồi lớn dùng được 3 ngày.",
+      "prepTimeMinutes": 20,
+      "servings": 3,
+      "wicIngredients": [],
+      "snapIngredients": ["Cải thìa (bok choy)", "Đậu hũ cứng", "Tỏi", "Dầu mè", "Muối"]
+    },
+    {
+      "name": "Cơm Gà Hấp Sả",
+      "nameTranslated": "Lemongrass Steamed Chicken Rice",
+      "description": "Gà hấp với sả và gừng phục vụ với cơm trắng. Đơn giản, bổ dưỡng và kinh tế — một con gà nấu được 4 bữa.",
+      "prepTimeMinutes": 45,
+      "servings": 4,
+      "wicIngredients": [],
+      "snapIngredients": ["Đùi gà", "Sả", "Gừng", "Gạo jasmine", "Nước mắm"]
+    }
+  ],
+  "tips": [
+    "Đăng ký phiếu SFMNP ($50) tại Văn phòng Người cao tuổi DC — chợ Eastern Market gần nhà bà nhận phiếu này.",
+    "Double Up Food Bucks tại Eastern Market: mua $25 rau củ bằng SNAP, nhận thêm $25 miễn phí.",
+    "Mang hóa đơn thuốc và lịch khám bệnh cho caseworker — khoản khấu trừ y tế có thể tăng thêm tiền SNAP."
+  ],
+  "planNarrative": "Thưa bà Nguyễn, tiền SNAP của bà tăng từ $194 lên $258 mỗi tháng sau khi áp dụng đúng khoản khấu trừ y tế. Cộng thêm $50 phiếu SFMNP mùa hè, ngân sách thực phẩm của bà là $308/tháng. Eastern Market gần nhà bà nhất và chấp nhận Double Up Food Bucks — mỗi tháng bà có thể nhận thêm $25 rau củ miễn phí. Kho thực phẩm lưu động Capital Area Food Bank cũng phục vụ khu vực H St NE miễn phí."
+}

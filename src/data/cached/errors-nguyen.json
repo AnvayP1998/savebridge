@@ -1,0 +1,26 @@
+[
+  {
+    "id": "err-ng-001",
+    "type": "missing_deduction",
+    "title": "Elderly medical deduction likely under-applied",
+    "explanation": "Bà Nguyễn is 72 years old with $250/month in documented medical expenses for hypertension and arthritis. Only the $35 threshold is excluded — the remaining $215/month is a full dollar-for-dollar deduction from net income, increasing monthly SNAP by approximately $64. This deduction is frequently missed for elderly single-person households.",
+    "suggestedAction": "Verify all out-of-pocket medical costs: prescriptions, copays, medical transport, over-the-counter items prescribed by a doctor. Apply the full excess amount ($215) as a deduction.",
+    "fieldAffected": "medicalExpenses",
+    "benefitImpact": 64,
+    "severity": "warning",
+    "confidence": 0.95,
+    "references": ["7 CFR 273.9(d)(3)", "7 CFR 273.10(e)(1)(i)"]
+  },
+  {
+    "id": "err-ng-002",
+    "type": "missing_benefit",
+    "title": "Senior Farmers Market Nutrition Program (SFMNP) not flagged",
+    "explanation": "Bà Nguyễn qualifies for DC's Senior Farmers Market Nutrition Program — a $50 seasonal voucher for fresh produce at farmers markets including Eastern Market. This program is separate from SNAP and WIC and requires a separate enrollment that caseworkers often forget to initiate.",
+    "suggestedAction": "Enroll in DC SFMNP through the Office on Aging. Eastern Market and several H St NE vendors accept SFMNP vouchers — close to her address at 619 H St NE.",
+    "fieldAffected": "general",
+    "benefitImpact": 50,
+    "severity": "info",
+    "confidence": 0.98,
+    "references": ["7 CFR 248", "DC SFMNP Program Guide 2026"]
+  }
+]

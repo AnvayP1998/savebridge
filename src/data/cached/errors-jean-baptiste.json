@@ -1,0 +1,26 @@
+[
+  {
+    "id": "err-jb-001",
+    "type": "missing_deduction",
+    "title": "Childcare costs not entered — 2 children in household",
+    "explanation": "Théo (age 5) and Lucie (age 2) are listed in the household but monthly childcare cost is $0. DC daycare averages $1,800–$2,200/month per child. Even partial childcare expenses are a dollar-for-dollar SNAP deduction that directly increases the monthly benefit.",
+    "suggestedAction": "Ask Marie-Claire or Nadège: Do they pay for any daycare, after-school program, or babysitter so they can work? Document receipts or provider name.",
+    "fieldAffected": "childcareCost",
+    "benefitImpact": 120,
+    "severity": "warning",
+    "confidence": 0.89,
+    "references": ["7 CFR 273.9(d)(4)"]
+  },
+  {
+    "id": "err-jb-002",
+    "type": "missing_deduction",
+    "title": "Medical deduction may be understated — diabetic household member",
+    "explanation": "Notes indicate Marie-Claire (age 68) has Type 2 diabetes, but only $180/month in medical expenses is recorded. DC Medicaid copays, insulin supplies, transportation to medical appointments, and diabetic supplies all qualify. The medical deduction applies to all out-of-pocket expenses over $35/month for elderly or disabled members.",
+    "suggestedAction": "Request pharmacy receipts and medical appointment records. Any expense above $35/month increases SNAP eligibility dollar-for-dollar.",
+    "fieldAffected": "medicalExpenses",
+    "benefitImpact": 43,
+    "severity": "info",
+    "confidence": 0.76,
+    "references": ["7 CFR 273.9(d)(3)"]
+  }
+]

@@ -2,20 +2,29 @@ import { NextRequest, NextResponse } from "next/server";
 import { detectErrors } from "@/lib/claude/prompts/errorDetection";
 import type { Family } from "@/types";
 
-// 1. Statically import the cached JSON so Next.js bundles it automatically
+// 1. Statically import all cached JSONs so Next.js bundles them automatically
 import cachedRodriguezErrors from "@/data/cached/errors-rodriguez.json";
+import cachedJeanBaptisteErrors from "@/data/cached/errors-jean-baptiste.json";
+import cachedNguyenErrors from "@/data/cached/errors-nguyen.json";
+
+const CACHED_ERRORS: Record<string, unknown[]> = {
+  rodriguez: cachedRodriguezErrors,
+  "jean-baptiste": cachedJeanBaptisteErrors,
+  nguyen: cachedNguyenErrors,
+};
 
 export async function POST(req: NextRequest) {
   try {
     const family: Family = await req.json();
 
-    // 2. Demo Bypass: If it's Rosa (fam-001), instantly serve the static cache
-    if (family.id === "rodriguez") {
-      console.log("[analyze-application] Serving static cache for demo");
-      return NextResponse.json({ errors: cachedRodriguezErrors });
+    // 2. Demo Bypass: Serve static cache for all known demo families
+    if (CACHED_ERRORS[family.id]) {
+      console.log(`[analyze-application] Serving static cache for ${family.id}`);
+      return NextResponse.json({ errors: CACHED_ERRORS[family.id] });
     }
 
     // 3. Fallback to live AI if it's a different family (will fail if no credits)
+    
     const errors = await detectErrors(family);
     return NextResponse.json({ errors });
   } catch (err) {
