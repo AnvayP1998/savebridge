@@ -273,6 +273,32 @@ export default function FamilyPage() {
             </div>
           )}
 
+          {/* Print / Share plan */}
+          <div className="flex gap-2 pb-1">
+            <button
+              onClick={() => window.print()}
+              className="flex-1 flex items-center justify-center gap-2 border border-gray-200 rounded-xl py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
+              🖨️ {lang === "es" ? "Imprimir plan" : "Print plan"}
+            </button>
+            <button
+              onClick={() => {
+                const text = [
+                  `SavorBridge — ${lang === "es" ? "Plan de Beneficios" : "Benefit Plan"}`,
+                  `SNAP: $${plan.monthlySummary.snapAmount} · WIC: $${plan.monthlySummary.wicValue} · Total: $${plan.monthlySummary.totalFoodBudget}`,
+                  "",
+                  lang === "es" ? "Artículos WIC:" : "WIC Items:",
+                  ...plan.wicPriorities.map(w => `• ${w.category} — ${w.quantity}`),
+                  "",
+                  lang === "es" ? "Dónde comprar:" : "Where to shop:",
+                  ...plan.shoppingRoute.map(s => `• ${s.storeName} — ${s.address}`),
+                ].join("\n");
+                navigator.clipboard.writeText(text).then(() => alert(lang === "es" ? "¡Copiado al portapapeles!" : "Copied to clipboard!"));
+              }}
+              className="flex-1 flex items-center justify-center gap-2 border border-gray-200 rounded-xl py-2.5 text-sm font-semibold text-gray-600 hover:bg-gray-50 transition-colors">
+              📋 {lang === "es" ? "Copiar resumen" : "Copy summary"}
+            </button>
+          </div>
+
           {/* Quick questions */}
           <div className="pb-4">
             <p className="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">

@@ -16,3 +16,9 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans);
 }
+
+@media print {
+  /* Hide interactive chrome when printing the family plan */
+  .fixed { display: none !important; }
+  body { background: white; }
+}

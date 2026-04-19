@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, use } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import CountUp from "react-countup";
 import Link from "next/link";
 import type { ErrorFlag, BenefitPlan, Family } from "@/types";
@@ -174,39 +175,47 @@ export default function ApplicationPage({ params }: { params: Promise<{ id: stri
           )}
         </div>
 
-        {/* Error banners */}
-        {showErrors && errors.map((err) => (
-          <div key={err.id} className={`rounded-2xl border-l-4 p-5 mb-4 ${
-            err.severity === "warning" ? "bg-yellow-50 border-yellow-400"
-            : err.severity === "critical" ? "bg-red-50 border-red-500"
-            : "bg-blue-50 border-blue-400"}`}>
-            <div className="flex items-start gap-2 mb-1">
-              <span className="shrink-0">{err.severity === "warning" ? "⚠️" : "ℹ️"}</span>
-              <h3 className="font-bold text-gray-900 text-sm flex-1">{err.title}</h3>
-              <span className="shrink-0 text-xs font-semibold bg-white border border-yellow-300 text-yellow-800 px-2 py-0.5 rounded-full">
-                +${err.benefitImpact}/mo
-              </span>
-            </div>
-            <p className="text-sm text-gray-700 mb-2 ml-6">{err.explanation}</p>
-            <p className="text-sm font-medium text-gray-800 ml-6">💡 {err.suggestedAction}</p>
-            {err.references && (
-              <p className="text-xs text-gray-400 ml-6 mt-1">Ref: {err.references.join(", ")}</p>
-            )}
-            <div className="ml-6 mt-3">
-              {phase === "errors" && (
-                <button onClick={() => setPhase("asked")}
-                  className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-semibold px-5 py-2 rounded-lg text-sm transition-colors">
-                  Ask Rosa →
-                </button>
+        {/* Error banners — animated */}
+        <AnimatePresence>
+          {showErrors && errors.map((err, i) => (
+            <motion.div
+              key={err.id}
+              initial={{ opacity: 0, x: -24 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 24 }}
+              transition={{ duration: 0.35, delay: i * 0.12, ease: "easeOut" }}
+              className={`rounded-2xl border-l-4 p-5 mb-4 ${
+                err.severity === "warning" ? "bg-yellow-50 border-yellow-400"
+                : err.severity === "critical" ? "bg-red-50 border-red-500"
+                : "bg-blue-50 border-blue-400"}`}>
+              <div className="flex items-start gap-2 mb-1">
+                <span className="shrink-0">{err.severity === "warning" ? "⚠️" : "ℹ️"}</span>
+                <h3 className="font-bold text-gray-900 text-sm flex-1">{err.title}</h3>
+                <span className="shrink-0 text-xs font-semibold bg-white border border-yellow-300 text-yellow-800 px-2 py-0.5 rounded-full">
+                  +${err.benefitImpact}/mo
+                </span>
+              </div>
+              <p className="text-sm text-gray-700 mb-2 ml-6">{err.explanation}</p>
+              <p className="text-sm font-medium text-gray-800 ml-6">💡 {err.suggestedAction}</p>
+              {err.references && (
+                <p className="text-xs text-gray-400 ml-6 mt-1">Ref: {err.references.join(", ")}</p>
               )}
-              {benefitUpdated && (
-                <p className="text-sm font-medium text-green-700 flex items-center gap-1">
-                  ✅ Deductions confirmed — benefit updated to ${updatedBenefit}/mo
-                </p>
-              )}
-            </div>
-          </div>
-        ))}
+              <div className="ml-6 mt-3">
+                {phase === "errors" && (
+                  <button onClick={() => setPhase("asked")}
+                    className="bg-yellow-400 hover:bg-yellow-500 text-yellow-900 font-semibold px-5 py-2 rounded-lg text-sm transition-colors">
+                    Ask {family.firstName} →
+                  </button>
+                )}
+                {benefitUpdated && (
+                  <p className="text-sm font-medium text-green-700 flex items-center gap-1">
+                    ✅ Deductions confirmed — benefit updated to ${updatedBenefit}/mo
+                  </p>
+                )}
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
 
         {phase === "asked" && (
           <button onClick={generatePlan}
