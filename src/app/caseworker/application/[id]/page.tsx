@@ -326,10 +326,11 @@ export default function ApplicationPage({ params }: { params: Promise<{ id: stri
 
             <button
               onClick={() => {
-                localStorage.setItem("savorbridge-plan", JSON.stringify(plan));
-                localStorage.setItem("savorbridge-familyId", family.id);
-                window.open("/family", "_blank");
-              }}
+  localStorage.setItem("savorbridge-plan", JSON.stringify(plan));
+  localStorage.setItem("savorbridge-familyId", family.id);
+  localStorage.setItem("savorbridge-familyName", family.name);
+  window.open("/family", "_blank");
+}}
               className="w-full bg-[#1F3A5F] hover:bg-[#162d4a] text-white font-semibold py-3 rounded-xl transition-colors flex items-center justify-center gap-2">
               📱 Send to {family.firstName}&apos;s Phone
             </button>
