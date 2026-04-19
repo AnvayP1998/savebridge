@@ -34,6 +34,7 @@ const QUICK_QUESTIONS: Record<"es" | "en", string[]> = {
 export default function FamilyPage() {
   const [plan, setPlan] = useState<BenefitPlan | null>(null);
   const [familyId, setFamilyId] = useState("rodriguez");
+  const [familyDisplayName, setFamilyDisplayName] = useState("Rosa Rodríguez");
   const [query, setQuery] = useState("");
   const [answer, setAnswer] = useState("");
   const [listening, setListening] = useState(false);
@@ -51,10 +52,12 @@ export default function FamilyPage() {
     // Load plan from localStorage (written by caseworker "Send to Phone" button)
     const stored = localStorage.getItem("savorbridge-plan");
     const storedId = localStorage.getItem("savorbridge-familyId");
+    const storedName = localStorage.getItem("savorbridge-familyName");
     if (stored) {
       try {
         setPlan(JSON.parse(stored));
         if (storedId) setFamilyId(storedId);
+        if (storedName) setFamilyDisplayName(storedName);
         return;
       } catch { /* fall through */ }
     }
@@ -103,8 +106,6 @@ export default function FamilyPage() {
 
   if (!plan) return <div className="flex items-center justify-center min-h-screen text-gray-400">Cargando...</div>;
 
-  // Derive family name from plan narrative or fall back gracefully
-  const familyName = (plan as unknown as { familyId?: string }).familyId ?? familyId;
 
   return (
     <main className="min-h-screen bg-gray-50 flex flex-col items-center">
@@ -115,7 +116,7 @@ export default function FamilyPage() {
           <div>
             <h1 className="font-bold text-lg">🌉 SavorBridge</h1>
             <p className="text-xs opacity-70">
-              {lang === "es" ? "Plan de Beneficios" : "Benefit Plan"} · {familyName}
+              {lang === "es" ? "Plan de Beneficios" : "Benefit Plan"} · {familyDisplayName}
             </p>
           </div>
           <button
