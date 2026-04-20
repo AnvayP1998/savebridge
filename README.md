@@ -159,4 +159,4 @@ MIT — open source, built in 24 hours.
 | Role | People |
 |---|---|
 | Backend + API | Ketan Dhamdhere, Anvay Paralikar |
-| Frontend + Data | Liam Mcdonald, Kosma Chelkowski |
+| Frontend + Data | Liam MacDonald, Kosma Chelkowski |
